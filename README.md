@@ -8,6 +8,12 @@ To begin, we will install a new Laravel project. Let’s name it "blog" (but you
 
 Be sure to have composer install on your computer : https://getcomposer.org/
 
+To check if Composer is installed on your computer, open a terminal and run:
+
+```
+composer -v
+```
+
 Go into your default repetory (example, under Laragon : www repertory). Open a new terminal:
 ```
 composer global require laravel/installer
