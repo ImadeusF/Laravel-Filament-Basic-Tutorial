@@ -18,15 +18,17 @@ Go into your default repetory (example, under Laragon : www repertory). Open a n
 ```
 composer global require laravel/installer
 ```
-Then run :
+Then run (blog will be the name of your repertory):
 ```
-laravel new blog
+laravel new blog 
 ```
 
 During the installation, select the following options:
 Breeze / Blade / Dark mode (choose what you prefer) / Pest / No Git / MySQL
 
 Breeze will allow you to immediately use a login and registration area (ready to use).
+
+Following the 'no git' option, the installation may seem to hang - please be patient. 
 
 Under the terminal, go into your folder :
 ```
@@ -62,7 +64,7 @@ If everything is working correctly, you will see the tables added with a green "
 It's time to add Filament to our project.
 In the terminal, run:
 ```
-composer require filament/filament:"^3.2" -W
+composer require filament/filament:"^3.3" -W
 ```
 Afterward, add the following command (we prepare the Filament environment to work better and faster):
 ```
@@ -70,7 +72,9 @@ php artisan filament:install --panels
 ```
 At the step "What's the ID," just press Enter.
 
-Next, we will add our first admin user (we will be able to use it as a Laravel member but also as a Filament admin user—it will be a unique user).
+At the step "Would you like to show some love by starring the Filament repo on Github : choose yes or no.
+
+Next, we will add our first admin user (we will be able to use it as a Laravel member but also as a Filament admin user - it will be a unique user).
 ```
 php artisan make:filament-user
 ```
@@ -104,7 +108,7 @@ A model file will be created in the following directory: app/Models.
 We will modify the migration file to define the structure of our table in the database.
 In VSCode, open the database/migrations/xxxxxcreate_categories_table.php file and edit the up() function, replacing it with:
 ```
-      public function up(): void
+public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
@@ -186,7 +190,11 @@ Okay, but at this point, you might want to customize this menu a bit. This is qu
 ### Change the icon
 Go to the folder: app/Filament/Resources, and choose, for example: ArticleResource.php
 
-Find the following line (at the beginning) and replace it with:
+Find the following line (at the beginning) :
+```
+protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+```
+and replace it with:
 ```
 protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 ```
@@ -253,7 +261,7 @@ Do the same in app/Filament/CategoriesResource.php and app/Filament/UserResource
 
 Refresh the page and see the results. 
 
-## Filament : add new categoriers and new articles
+## Filament : add new categories and new articles
 
 You may have already tried adding a category or article and encountered an error. You can try to add one now, but it won’t work.
 
@@ -271,7 +279,7 @@ Next, in App/Models/Article.php, add the following line under use HasFactory;:
 ```
 protected $fillable = ['title', 'content', 'user_id', 'category_id'];
 ```
-But if you try to add an article, but you will have to add manually the id of the user and the id of the category ... ! 
+But if you try to add an article, you will have to add manually the id of the user and the id of the category ... ! 
 
 Of course, since we’ve made some relationships between our tables, we need to define how to manage this situation:
 Let’s go to App/Models/Article.php and add:
@@ -395,8 +403,8 @@ Some adjustments are needed in the code. In the head section, add this line unde
 ```
 Now, navigate to your website (not the admin zone, but the regular URL of your project) and refresh the page.
 
-For this tutorial, we will not correct the profile menu and profile links, so you can comments the following lines.
-Comment the following lines :
+For this tutorial, we will not correct the profile menu and profile links, so you can comments the following lines:
+
 ```
 <div class="mt-3 space-y-1 px-2">
     <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
